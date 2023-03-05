@@ -1,10 +1,23 @@
 import { useState, ChangeEvent, FormEvent } from "react"
+import { Configuration, OpenAIApi } from "openai"
 import { PlusCircle } from "phosphor-react"
+
+import { ImageProps } from "../App"
 
 import styles from "./NewImageForm.module.css"
 
-export function NewImageForm() {
+interface NewImageFormProps {
+  createNewImageList: (newImagesList: ImageProps[]) => void
+}
+
+export function NewImageForm({ createNewImageList }: NewImageFormProps) {
   const [imageDescription, setImageDescription] = useState("")
+
+  const configuration = new Configuration({
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  })
+
+  const openai = new OpenAIApi(configuration)
 
   const hasNoDescription = imageDescription.length === 0
 
@@ -12,10 +25,21 @@ export function NewImageForm() {
     setImageDescription(event.target.value)
   }
 
-  function handleNewTaskForm(event: FormEvent) {
+  async function handleNewTaskForm(event: FormEvent) {
     event.preventDefault()
 
-    // createNewTask(task)
+    const { data } = await openai.createImage({
+      prompt: imageDescription,
+      n: 6,
+      size: "256x256",
+      user: "ArtifyWebpage",
+    })
+
+    const newImageList = data.data.map((info) => {
+      return { source: info.url } as ImageProps
+    })
+
+    createNewImageList(newImageList)
     setImageDescription("")
   }
 

@@ -1,19 +1,20 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { X } from "phosphor-react"
+import { ImageProps } from "../App"
 
 import styles from "./Image.module.css"
 
-export function Image() {
+export function Image({ source }: ImageProps) {
   return (
     <>
       <Dialog.Root>
         <Dialog.Trigger asChild className={styles.DialogTrigger}>
-          <img src="https://picsum.photos/256/256?random=1" />
+          <img src={source} />
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className={styles.DialogOverlay} />
           <Dialog.Content className={styles.DialogContent}>
-            <img src="https://picsum.photos/256/256?random=1" />
+            <img src={source} />
             <Dialog.Close asChild className={styles.IconButton}>
               <X size={22} />
             </Dialog.Close>

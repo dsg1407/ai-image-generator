@@ -1,15 +1,18 @@
 import styles from "./Gallery.module.css"
 import { Image } from "./Image"
 
-export function Gallery() {
+import { ImageProps } from "../App"
+
+interface GalleryProps {
+  imagesList: ImageProps[]
+}
+
+export function Gallery({ imagesList }: GalleryProps) {
   return (
     <div className={styles.wrapper}>
-      <Image />
-      <Image />
-      <Image />
-      <Image />
-      <Image />
-      <Image />
+      {imagesList.map((image) => {
+        return <Image key={image.source} source={image.source} />
+      })}
     </div>
   )
 }
