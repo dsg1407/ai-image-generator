@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
+  gap: 2rem;
   margin: 0 auto;
 
   max-width: 736px;
@@ -23,4 +23,43 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
+}
+
+.coffee a {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.coffee a img {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+
+  transition: filter 0.1s;
+}
+
+.coffee a img:hover {
+  filter: brightness(80%);
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    margin: 0 15px;
+    font-size: 0.875rem;
+  }
+
+  .wrapper input {
+    font-size: 0.875rem;
+  }
+
+  .coffee a {
+    right: 10px;
+    top: 10px;
+  }
+  .coffee a img {
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
+  }
 }

@@ -1,36 +1,35 @@
 import { useState, ChangeEvent, FormEvent } from "react"
-import { v4 as uuidv4 } from "uuid"
 import { PlusCircle } from "phosphor-react"
 
 import styles from "./NewImageForm.module.css"
 
 export function NewImageForm() {
-  const [taskDescription, setTaskDescription] = useState("")
+  const [imageDescription, setImageDescription] = useState("")
 
-  const hasNoDescription = taskDescription.length === 0
+  const hasNoDescription = imageDescription.length === 0
 
-  function handleTaskDescriptionChange(event: ChangeEvent<HTMLInputElement>) {
-    setTaskDescription(event.target.value)
+  function handleImageDescriptionChange(event: ChangeEvent<HTMLInputElement>) {
+    setImageDescription(event.target.value)
   }
 
   function handleNewTaskForm(event: FormEvent) {
     event.preventDefault()
 
     // createNewTask(task)
-    setTaskDescription("")
+    setImageDescription("")
   }
 
   return (
     <form className={styles.form} onSubmit={handleNewTaskForm}>
       <input
         type="text"
-        placeholder="Adicione uma nova tarefa"
-        value={taskDescription}
-        onChange={handleTaskDescriptionChange}
+        placeholder="What do you want to create ?"
+        value={imageDescription}
+        onChange={handleImageDescriptionChange}
         required
       />
       <button type="submit" disabled={hasNoDescription}>
-        Criar
+        Create
         <PlusCircle size={21.34} />
       </button>
     </form>

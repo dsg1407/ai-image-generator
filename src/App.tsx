@@ -17,6 +17,15 @@ export function App() {
           </section>
         </section>
       </main>
+      <footer className={styles.coffee}>
+        <a
+          href="https://www.buymeacoffee.com/dsg1407"
+          target="_blank"
+          title="Buy me a Coffee!!"
+        >
+          <img src="../../public/buy-coffee-qr.png" />
+        </a>
+      </footer>
     </>
   )
 }

@@ -1,8 +1,15 @@
 .header {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   height: 12.5rem;
   background: var(--gray-700);
+
+  font-size: 0.875rem;
+}
+
+.header p {
+  color: var(--gray-300);
 }
