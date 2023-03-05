@@ -1,0 +1,27 @@
+.wrapper {
+  /* display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem; */
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+
+  width: 97%;
+}
+
+.wrapper img {
+  border-radius: 8px;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    width: 90%;
+    margin: 0 auto;
+
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

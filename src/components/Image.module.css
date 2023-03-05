@@ -1,0 +1,60 @@
+.DialogTrigger {
+  cursor: pointer;
+}
+
+.DialogTrigger:hover {
+  opacity: 0.8;
+}
+
+.DialogOverlay {
+  background-color: var(--gray-700);
+  position: fixed;
+  inset: 0;
+
+  opacity: 0.6;
+}
+
+.DialogContent {
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  padding: 40px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent:focus {
+  box-shadow: none;
+}
+
+.DialogContent img {
+  width: 100%;
+}
+
+.IconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

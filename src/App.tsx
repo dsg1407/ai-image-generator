@@ -1,5 +1,6 @@
 import { Header } from "./components/Header"
 import { NewImageForm } from "./components/NewImageForm"
+import { Gallery } from "./components/Gallery"
 import { EmptyImagesList } from "./components/EmptyImagesList"
 
 import "./styles/global.css"
@@ -13,7 +14,8 @@ export function App() {
         <NewImageForm />
         <section className={styles.imagesSection}>
           <section className={styles.imagesListSection}>
-            <EmptyImagesList />
+            <Gallery />
+            {/* <EmptyImagesList /> */}
           </section>
         </section>
       </main>
@@ -23,7 +25,7 @@ export function App() {
           target="_blank"
           title="Buy me a Coffee!!"
         >
-          <img src="../../public/buy-coffee-qr.png" />
+          <img src="./buy-coffee-qr.png" />
         </a>
       </footer>
     </>
