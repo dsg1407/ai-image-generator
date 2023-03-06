@@ -1,11 +1,9 @@
 <p align="center">
-  <img alt="Logo"src="./public/rocket.svg" width="35px"/>
+  <img alt="Logo"src="./src/assets/logo.svg"/>
 </p>
 
-<h1 align="center">ToDo - Task Manager </h1>
-
 <p align="center">
-  A Task Manager Webapp
+  An AI image generator from text
 </p>
 
 <p align="center">
@@ -23,7 +21,7 @@
 <br>
 
 <p align="center">
-  <img alt="Ai Chat Screen" src="./src/assets/Capa.png" width="100%">
+  <img src="./src/assets/Artify-Gif.gif" width="100%">
 </p>
 
 ## 🚀 Technologies
@@ -42,7 +40,7 @@ Here are the packages used in this project.
 
 - phosphor-react -> Library with various icon providers for react.
 - radix-ui -> Unstyled, accessible components for building design systems and web apps in React.
-- uuid -> Creates RFC4122 UUIDs
+- openai -> artificial general intelligence api
 
 ---
 
