@@ -8,9 +8,13 @@ import styles from "./NewImageForm.module.css"
 
 interface NewImageFormProps {
   createNewImageList: (newImagesList: ImageProps[]) => void
+  changeLoadingStatus: (status: boolean) => void
 }
 
-export function NewImageForm({ createNewImageList }: NewImageFormProps) {
+export function NewImageForm({
+  createNewImageList,
+  changeLoadingStatus,
+}: NewImageFormProps) {
   const [imageDescription, setImageDescription] = useState("")
 
   const configuration = new Configuration({
@@ -28,19 +32,27 @@ export function NewImageForm({ createNewImageList }: NewImageFormProps) {
   async function handleNewTaskForm(event: FormEvent) {
     event.preventDefault()
 
-    const { data } = await openai.createImage({
-      prompt: imageDescription,
-      n: 6,
-      size: "256x256",
-      user: "ArtifyWebpage",
-    })
-
-    const newImageList = data.data.map((info) => {
-      return { source: info.url } as ImageProps
-    })
-
-    createNewImageList(newImageList)
+    changeLoadingStatus(true)
     setImageDescription("")
+
+    try {
+      const { data } = await openai.createImage({
+        prompt: imageDescription,
+        n: 6,
+        size: "256x256",
+        user: "ArtifyWebpage",
+      })
+
+      const newImageList = data.data.map((info) => {
+        return { source: info.url } as ImageProps
+      })
+
+      createNewImageList(newImageList)
+      changeLoadingStatus(false)
+    } catch (err) {
+      createNewImageList([])
+      changeLoadingStatus(false)
+    }
   }
 
   return (

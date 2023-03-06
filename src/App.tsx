@@ -15,23 +15,31 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export function App() {
   const [imagesList, setImagesList] = useState<ImageProps[]>([])
+  const [loading, setLoading] = useState(false)
 
   function createNewImageList(newImagesList: ImageProps[]) {
     setImagesList(newImagesList)
+  }
+
+  function changeLoadingStatus(status: boolean) {
+    setLoading(status)
   }
 
   return (
     <>
       <Header />
       <main className={styles.wrapper}>
-        <NewImageForm createNewImageList={createNewImageList} />
+        <NewImageForm
+          createNewImageList={createNewImageList}
+          changeLoadingStatus={changeLoadingStatus}
+        />
         <section className={styles.imagesSection}>
           <section className={styles.imagesListSection}>
-            {imagesList.length > 0 ? (
-              <Gallery imagesList={imagesList} />
-            ) : (
-              <EmptyImagesList />
-            )}
+            {imagesList.length > 0 &&
+              (loading ? <Loading /> : <Gallery imagesList={imagesList} />)}
+
+            {imagesList.length == 0 &&
+              (loading ? <Loading /> : <EmptyImagesList />)}
           </section>
         </section>
       </main>
