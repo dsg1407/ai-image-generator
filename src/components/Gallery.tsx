@@ -11,7 +11,7 @@ export function Gallery({ imagesList }: GalleryProps) {
   return (
     <div className={styles.wrapper}>
       {imagesList.map((image) => {
-        return <Image key={image.source} source={image.source} />
+        return <Image key={image.source} source={`${image.source}`} />
       })}
     </div>
   )

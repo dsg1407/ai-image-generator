@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react"
-import { Configuration, OpenAIApi } from "openai"
+import { GoogleGenAI, MediaResolution, Modality } from "@google/genai";
 import { PlusCircle } from "phosphor-react"
 
 import { ImageProps } from "../App"
@@ -17,11 +17,7 @@ export function NewImageForm({
 }: NewImageFormProps) {
   const [imageDescription, setImageDescription] = useState("")
 
-  const configuration = new Configuration({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  })
-
-  const openai = new OpenAIApi(configuration)
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY })
 
   const hasNoDescription = imageDescription.length === 0
 
@@ -36,19 +32,24 @@ export function NewImageForm({
     setImageDescription("")
 
     try {
-      const { data } = await openai.createImage({
-        prompt: imageDescription,
-        n: 6,
-        size: "256x256",
-        user: "ArtifyWebpage",
-      })
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash-preview-image-generation",
+        contents: imageDescription,
+        config: {
+          responseModalities: [Modality.TEXT, Modality.IMAGE],
+        },
+      });
 
-      const newImageList = data.data.map((info) => {
-        return { source: info.url } as ImageProps
-      })
+      if (response.candidates && response.candidates[0].content?.parts) {
+        const newImageList = response.candidates[0].content.parts.map((info) => {
+          if (info.text) return
+          return { source: info.inlineData?.data } as ImageProps
+        }).filter(info => !!info)
 
-      createNewImageList(newImageList)
-      changeLoadingStatus(false)
+        createNewImageList(newImageList)
+        changeLoadingStatus(false)
+      }
+
     } catch (err) {
       createNewImageList([])
       changeLoadingStatus(false)

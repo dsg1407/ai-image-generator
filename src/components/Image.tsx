@@ -9,12 +9,12 @@ export function Image({ source }: ImageProps) {
     <>
       <Dialog.Root>
         <Dialog.Trigger asChild className={styles.DialogTrigger}>
-          <img src={source} />
+          <img src={`data:image/png;base64, ${source}`} />
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className={styles.DialogOverlay} />
           <Dialog.Content className={styles.DialogContent}>
-            <img src={source} />
+            <img src={`data:image/png;base64, ${source}`} />
             <Dialog.Close asChild className={styles.IconButton}>
               <X size={22} />
             </Dialog.Close>
