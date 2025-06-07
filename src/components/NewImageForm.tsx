@@ -43,8 +43,8 @@ export function NewImageForm({
       if (response.candidates && response.candidates[0].content?.parts) {
         const newImageList = response.candidates[0].content.parts.map((info) => {
           if (info.text) return
-          return { source: info.inlineData?.data } as ImageProps
-        }).filter(info => !!info)
+          return { source: info.inlineData?.data }
+        }).filter(info => !!info) as ImageProps[]
 
         createNewImageList(newImageList)
         changeLoadingStatus(false)
